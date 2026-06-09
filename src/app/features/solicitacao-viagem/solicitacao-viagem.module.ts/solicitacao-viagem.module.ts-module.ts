@@ -9,4 +9,4 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ]
 })
-export class SolicitacaoViagemModule { }
+export class SolicitacaoViagemModuleTsModule { }

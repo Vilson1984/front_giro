@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { FormSolicitacao } from '../../../features/solicitacao-viagem/components/form-solicitacao/form-solicitacao';
+import { Form } from '../../components/form/form';
 
 @Component({
   selector: 'app-solicitacao-viagem',
-  imports: [FormSolicitacao],
+  imports: [Form],
   templateUrl: './solicitacao-viagem.html',
   styleUrl: './solicitacao-viagem.scss',
+  standalone: true
 })
 export class SolicitacaoViagem {
 

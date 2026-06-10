@@ -1,21 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SolicitacaoViagemService {
   constructor(private http: HttpClient) {}
-  
+
+  estimateRide: any;
+
   calcularViagem(customer_id: string, origin: string, destination: string): Observable<any> {
-    return this.http.post('http://localhost:3001/ride/estimate', {
+    this.estimateRide = this.http.post('http://localhost:3001/ride/estimate', {
       customer_id,
       origin,
-      destination
+      destination,
     });
+    return this.estimateRide;
   }
-  // "customer_id": "123",
-  // "origin": "Av. Jaguaribe, Osasco",
-  // "destination": "Praça da Sé, São Paulo"
+
+  private enviaDadosOpcoes = new BehaviorSubject<any>(''); // Inicializa com um valor padrão, se necessário
+  dadosOpcoes = this.enviaDadosOpcoes.asObservable();
+  enviaDados(dados: any) {
+    this.enviaDadosOpcoes.next(dados);
+  }
 }

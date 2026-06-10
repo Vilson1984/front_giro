@@ -9,7 +9,7 @@ import { SolicitacaoViagemService } from '../../services/solicitacao-viagem.serv
   styleUrl: './form.scss',
 })
 export class Form {
-  constructor(private service: SolicitacaoViagemService) {}
+  constructor(private service: SolicitacaoViagemService, private solicitacaoViagemService: SolicitacaoViagemService) {}
   userId: string = '';
   origin: string = '';
   destination: string = '';
@@ -21,9 +21,11 @@ export class Form {
         next: response => { 
           this.estimate = response;
           console.log('Estimativa de viagem:', response);
+          this.solicitacaoViagemService.enviaDados(this.estimate);
         },
         error: error => {
           console.error('Erro ao calcular viagem:', error);
+          this.solicitacaoViagemService.enviaDados(this.estimate);
         }
       });
   }

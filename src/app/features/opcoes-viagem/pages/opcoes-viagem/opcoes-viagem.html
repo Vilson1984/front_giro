@@ -1,1 +1,8 @@
-<div class="opcoes-viagem"><h1>Opções de Viagem</h1></div>
+<div class="opcoes-viagem"><h1>Opções de Viagem</h1>
+
+<div *ngFor="let item of dados">
+    {{item | json}}
+    <button>Selecionar</button>
+</div>
+
+</div>

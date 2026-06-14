@@ -1,9 +1,15 @@
 <div class="opcoes-viagem"><h1>Opções de Viagem</h1>
 
+<div *ngIf="route$ | async as route; else noRoute">
+  <p>Origem: {{ route.origin }}</p>
+  <p>Destino: {{ route.destination }}</p>
+  <img [src]="getRouteMapUrl(route.origin, route.destination, route.encodedPolyline)" alt="Mapa da Rota" />
+</div>
+<ng-template #noRoute>
+  <p>Preencha o endereço de origem e de destino, para procurarmos os motoristas disponíveis.</p>
+</ng-template>
+
 <div *ngFor="let item of dados$ | async">
-  <!-- {{ item | json }} -->
-  <!-- {{item.driver | json}} -->
-  
   <div>
       Nome: {{item.driver.name | json}}
       Rating: {{item.driver.rating | json}}
@@ -19,12 +25,5 @@
   </div>
   <button>Selecionar</button>
   
-<!-- { 
-    "driver": 
-        { "id": 1, "name": "Homer Simpson", "description": "Motorista camarada", "vehicle": "Plymouth Valiant 1973", "rating": 2, "tax_per_km": 2.5, "min_km": 1 }, 
-        "price": 202.39 
-} -->
 </div>
-
-
 </div>

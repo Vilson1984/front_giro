@@ -1,13 +1,13 @@
 <div class="opcoes-viagem"><h1>Opções de Viagem</h1>
 
 <div *ngIf="route$ | async as route; else noRoute">
-  <p>Origem: {{ route.origin }}</p>
+  <p>Origem: {{ route.origin }}</p> 
   <p>Destino: {{ route.destination }}</p>
   <img [src]="getRouteMapUrl(route.origin, route.destination, route.encodedPolyline)" alt="Mapa da Rota" />
 </div>
 <ng-template #noRoute>
   <p>Preencha o endereço de origem e de destino, para procurarmos os motoristas disponíveis.</p>
-</ng-template>
+</ng-template> 
 
 <div *ngFor="let item of dados$ | async">
   <div>
@@ -23,7 +23,7 @@
       min/Km: {{item.driver.min_km | json}}
      Valor Viagem: {{item.price | json}}
   </div>
-  <button>Selecionar</button>
+  <button (click)="selectDriver(item)">Selecionar</button>
   
 </div>
 </div>

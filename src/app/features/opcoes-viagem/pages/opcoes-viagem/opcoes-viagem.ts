@@ -14,25 +14,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class OpcoesViagem implements OnInit {
   dados$!: Observable<any[]>;
-  route$!: Observable<{ origin: string; destination: string; encodedPolyline?: string; distanceInKm?:number} | null>;
+  route$!: Observable<{ origin: string; destination: string; encodedPolyline?: string; distanceInKm?:number; duration?:string} | null>;
   GOOGLE_API_KEY = environment.GOOGLE_API_KEY; // Pegando a chave do environment.ts
-
-  mockDados = {
-    customer_id: '42',
-    origin: 'Av. Jaguaribe, Osasco',
-    destination: 'itu',
-    distance: 83.849,
-    duration: '1.1819444444444445',
-    driver: {
-      id: 3,
-      name: 'James Bond',
-    },
-    value: 838.49,
-  };
 
   selectedDriverId?: number;
   selectedDriverName?: string;
-  selectedRoute?: { origin: string; destination: string; encodedPolyline?: string; distanceInKm?:number } | null;
+  selectedRoute?: { origin: string; destination: string; encodedPolyline?: string; distanceInKm?:number; duration?:string} | null;
 
   constructor(
     private solicitacaoViagemService: SolicitacaoViagemService,
@@ -44,7 +31,7 @@ export class OpcoesViagem implements OnInit {
     this.route$ = this.solicitacaoViagemService.route$;
     this.route$.subscribe(route => {
       this.selectedRoute = route;
-    });
+      });
     console.log('Dados das opções de viagem:', this.dados$);
     console.log('Dados da rota:', this.route$);
   }
@@ -63,13 +50,13 @@ export class OpcoesViagem implements OnInit {
   
   selectDriver(item: any) {
     console.log(">>>>>>>>>>>>>>>>>", this.selectedRoute)
-    // console.log(">>>>>>>>>>>>>>>>>", this.selectedRoute?.distance)
+    
     const travel = {
-      customer_id: '42',
+      customer_id: this.solicitacaoViagemService.enviarCustomerID(),
       origin: this.selectedRoute?.origin,
       destination: this.selectedRoute?.destination,
       distance: this.selectedRoute?.distanceInKm,
-      duration: '1.1819444444444445',
+      duration: String(this.selectedRoute?.duration),
       driver: {
         id: item.driver.id,
         name: item.driver.name,

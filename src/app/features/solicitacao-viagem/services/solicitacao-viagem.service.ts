@@ -4,10 +4,12 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environment/environment';
 
-interface RouteInfo {
+export interface RouteInfo {
   origin: string;
   destination: string;
   encodedPolyline?: string;
+  distanceInKm?: number;
+  // duration?: string;
 }
 
 @Injectable({
@@ -15,7 +17,7 @@ interface RouteInfo {
 })
 export class SolicitacaoViagemService {
   googleApiKey = environment.GOOGLE_API_KEY;
-  
+
   private enviaDadosOpcoes = new BehaviorSubject<any[]>([]);
   dadosOpcoes = this.enviaDadosOpcoes.asObservable();
 
@@ -49,9 +51,9 @@ export class SolicitacaoViagemService {
     if (dados?.optionsDrivers) {
       this.enviaDadosOpcoes.next(dados.optionsDrivers);
     }
-
+    console.log("dados", dados)
     if (origin && destination) {
-      this.routeSubject.next({ origin, destination, encodedPolyline });
+      this.routeSubject.next({ origin, destination, encodedPolyline, distanceInKm:dados?.distanceInKm });
     }
   }
 }

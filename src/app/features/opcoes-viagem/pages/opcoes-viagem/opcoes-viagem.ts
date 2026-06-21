@@ -14,7 +14,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class OpcoesViagem implements OnInit {
   dados$!: Observable<any[]>;
-  route$!: Observable<{ origin: string; destination: string; encodedPolyline?: string } | null>;
+  route$!: Observable<{ origin: string; destination: string; encodedPolyline?: string; distanceInKm?:number} | null>;
   GOOGLE_API_KEY = environment.GOOGLE_API_KEY; // Pegando a chave do environment.ts
 
   mockDados = {
@@ -32,7 +32,7 @@ export class OpcoesViagem implements OnInit {
 
   selectedDriverId?: number;
   selectedDriverName?: string;
-  selectedRoute?: { origin: string; destination: string; encodedPolyline?: string } | null;
+  selectedRoute?: { origin: string; destination: string; encodedPolyline?: string; distanceInKm?:number } | null;
 
   constructor(
     private solicitacaoViagemService: SolicitacaoViagemService,
@@ -62,11 +62,13 @@ export class OpcoesViagem implements OnInit {
   }
   
   selectDriver(item: any) {
+    console.log(">>>>>>>>>>>>>>>>>", this.selectedRoute)
+    // console.log(">>>>>>>>>>>>>>>>>", this.selectedRoute?.distance)
     const travel = {
       customer_id: '42',
       origin: this.selectedRoute?.origin,
       destination: this.selectedRoute?.destination,
-      distance: 50,
+      distance: this.selectedRoute?.distanceInKm,
       duration: '1.1819444444444445',
       driver: {
         id: item.driver.id,

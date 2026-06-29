@@ -1,5 +1,8 @@
 <div class="main">
     <p>historico works!</p>
+    <input type="text" id="idUsuario" [(ngModel)]="idUsuario">
+    <input type="select" id="idMotorista" [(ngModel)]="idMotorista">
+    <button (click)="pesquisar(idUsuario, idMotorista)">pesquisar</button>
 </div>
 <!-- Após confirmar a viagem, deve direcionar automaticamente para 
 a tela de histórico de viagens. 
@@ -8,6 +11,9 @@ Histórico de viagens
 seletor de motorista, com uma opção para mostrar todos e um 
 botão para aplicar o filtro. 
 ● Ao aplicar o filtro, deve exibir a lista das viagens realizadas, com: 
+>> http://localhost:3001/ride/42
+>> http://localhost:3001/ride/IdDoUsuario
+
 ○ data e hora da viagem. 
 ○ nome do motorista. 
 ○ origem. 

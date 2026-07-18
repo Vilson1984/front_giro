@@ -1,12 +1,9 @@
 <form>
-  <label for="userId">User ID:</label>
-  <input type="text" id="userId" [(ngModel)]="userId" name="userId" />
+  <input type="text" id="userId" placeholder="usuário ID" [(ngModel)]="userId" name="userId" />
 
-  <label for="origin">Origin:</label>
-  <input type="text" id="origin" [(ngModel)]="origin" name="origin" />
+  <input type="text" id="origin" placeholder="origem" [(ngModel)]="origin" name="origin" />
 
-  <label for="destination">Destination:</label>
-  <input type="text" id="destination" [(ngModel)]="destination" name="destination" />
+  <input type="text" id="destination" placeholder="destino" [(ngModel)]="destination" name="destination" />
 
-  <button type="button" (click)="calcular()">calcular</button>
+  <button type="button" (click)="calcular()">buscar motoristas</button>
 </form>

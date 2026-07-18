@@ -1,26 +1,24 @@
 <div class="main">
-    <p>historico works!</p>
-    <input type="text" id="idUsuario" [(ngModel)]="idUsuario">
-    <input type="select" id="idMotorista" [(ngModel)]="idMotorista">
+  <div>
+    <h2>Histórico de Viagens</h2>
+    <input type="text" id="idUsuario" placeholder="ID do Usuário" [(ngModel)]="idUsuario" />
+    <select id="idMotorista" placeholder="ID do Motorista" [(ngModel)]="idMotorista">
+      <option value=""></option>
+      <option value="1">Homer Simpson</option>
+      <option value="2">Dominic Toretto</option>
+      <option value="3">James Bond</option>
+    </select>
     <button (click)="pesquisar(idUsuario, idMotorista)">pesquisar</button>
-</div>
-<!-- Após confirmar a viagem, deve direcionar automaticamente para 
-a tela de histórico de viagens. 
-Histórico de viagens 
-● Deve mostrar um campo para informar o id do usuário, um 
-seletor de motorista, com uma opção para mostrar todos e um 
-botão para aplicar o filtro. 
-● Ao aplicar o filtro, deve exibir a lista das viagens realizadas, com: 
->> http://localhost:3001/ride/42
->> http://localhost:3001/ride/IdDoUsuario
+  </div>
 
-○ data e hora da viagem. 
-○ nome do motorista. 
-○ origem. 
-○ destino. 
-○ distância. 
-○ tempo. 
-○ valor. 
-Tratamento de erros 
-Em todas as telas, os erros devem ser exibidos para o usuário, 
-permitindo que ele verifique o problema e tente novamente.  -->
+  <div *ngFor="let viagem of historico" class="viagens">
+    <div>data e hora da viagem: {{ viagem.date }}</div>
+    <div>nome do motorista: {{ viagem.driver.name }}</div>
+    <div>origem: {{ viagem.origin }}</div>
+    <div>destino: {{ viagem.destination }}</div>
+    <div>distância: {{ viagem.distance }}</div>
+    <div>tempo: {{ viagem.duration }}</div>
+    <div>valor: {{ viagem.value }}</div>
+    <hr />
+  </div>
+</div>
